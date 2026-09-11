@@ -296,8 +296,15 @@ az keyvault secret set --vault-name buyorwait-kv --name GEMINI-API-KEY --value "
 
 ## Release Notes
 
+### September 11, 2026
+- Initial problem domain research and 90-day cashflow requirement modeling.
+
+### September 12, 2026
+- Dataset profile constraints analysis and baseline financial rules definition.
+
 ### Version 1.0.0 Production Release
 - Complete 90-day daily cashflow simulator with zero-hallucination math.
+
 - Multimodal OCR receipt parser and NLP message update parser.
 - 6-tier payment plan optimizer and schema-compliant CSV generator.
 - Azure deployment Dockerfile and GitHub Actions CI workflow.
