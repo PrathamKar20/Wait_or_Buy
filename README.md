@@ -16,6 +16,28 @@ A recommendation is safe only if the user can complete the full payment plan, co
 
 Read [`problem_statement.md`](./problem_statement.md) for the full task spec, input/output schema, allowed values, conflict-resolution rules, and submission format.
 
+### System Architecture
+
+```text
+[Input Files: CSV + Images + Messages]
+       │
+       ▼
+[Multimodal Parsers (Receipt OCR & Message NLP)]
+       │
+       ▼
+[Deterministic 90-Day Cashflow Engine]
+       │
+       ▼
+[Plan Optimizer (6-Level Ranking Hierarchy)]
+       │
+       ▼
+[Grounded Decision & Explanation Generator]
+       │
+       ▼
+[output.csv Schema Validator]
+```
+
+
 ---
 
 ## Quick Start
