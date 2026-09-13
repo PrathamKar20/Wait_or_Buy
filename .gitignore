@@ -1,0 +1,9 @@
+log.txt
+code.zip
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+node_modules/
+

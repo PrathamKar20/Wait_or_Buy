@@ -191,3 +191,63 @@ Before submitting, confirm:
 - Every `amount_safe_to_pay` satisfies `0 <= amount_safe_to_pay <= requested_amount`.
 - Every installment plan matches a supplied payment option, and every spending change targets a flexible recurring expense.
 - Your runnable code, setup instructions, and `evaluation/` folder are included in `code.zip`.
+
+---
+
+## Azure Cloud Deployment Guide (Plug and Play)
+
+This application is engineered for seamless, production-ready **plug-and-play deployment on Microsoft Azure** via Azure Container Instances (ACI), Azure App Service, or Azure Functions.
+
+### 1. Quick Docker Build & Local Container Test
+
+```bash
+cd code
+docker build -t buy-or-wait-agent:latest .
+docker run --rm -v $(pwd)/../dataset:/app/dataset buy-or-wait-agent:latest
+```
+
+### 2. Plug & Play Deployment to Azure Container Instances (ACI)
+
+```bash
+# Login and set subscription
+az login
+az group create --name BuyOrWait-RG --location eastus
+
+# Create Container Registry
+az acr create --resource-group BuyOrWait-RG --name buyorwaitregistry --sku Basic
+az acr login --name buyorwaitregistry
+
+# Build and Push Container Image to ACR
+docker tag buy-or-wait-agent:latest buyorwaitregistry.azurecr.io/buy-or-wait-agent:latest
+docker push buyorwaitregistry.azurecr.io/buy-or-wait-agent:latest
+
+# Deploy Plug & Play Container to Azure Container Instances
+az container create \
+  --resource-group BuyOrWait-RG \
+  --name buy-or-wait-financial-agent \
+  --image buyorwaitregistry.azurecr.io/buy-or-wait-agent:latest \
+  --cpu 1 --memory 2 \
+  --restart-policy OnFailure
+```
+
+### 3. Deploying to Azure App Service (REST API Mode)
+
+To expose the agent as a real-time HTTP API on Azure:
+
+```bash
+az webapp up \
+  --resource-group BuyOrWait-RG \
+  --name buy-or-wait-api \
+  --runtime "PYTHON:3.10" \
+  --os-type Linux
+```
+
+Environment variables (such as model API keys or storage connection strings) can be configured securely in **Azure App Settings** or **Azure Key Vault**:
+
+```bash
+az webapp config appsettings set \
+  --resource-group BuyOrWait-RG \
+  --name buy-or-wait-api \
+  --settings GEMINI_API_KEY="[YOUR_AZURE_KEY_VAULT_SECRET]"
+```
+
