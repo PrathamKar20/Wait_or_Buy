@@ -12,6 +12,14 @@ class MessageParser:
     def __init__(self, messages_df: pd.DataFrame):
         self.messages_df = messages_df if messages_df is not None else pd.DataFrame()
 
+    @staticmethod
+    def validate_date_string(date_str: str) -> bool:
+        """Validate if a string is a valid YYYY-MM-DD date."""
+        if not date_str or not isinstance(date_str, str):
+            return False
+        return bool(re.match(r'^\d{4}-\d{2}-\d{2}$', date_str.strip()))
+
+
     def get_user_messages(self, user_id: str, request_id: Optional[str] = None) -> List[Dict[str, Any]]:
         """Retrieve all relevant messages for a user and optional request_id."""
         if self.messages_df.empty:
