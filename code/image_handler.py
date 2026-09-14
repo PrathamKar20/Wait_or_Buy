@@ -36,3 +36,8 @@ class ImageHandler:
     def get_event_amount(self, event_id: str) -> float:
         """Returns the extracted image amount for an event_id if present, else None."""
         return self.amounts.get(event_id, None)
+
+    def has_image_event(self, event_id: str) -> bool:
+        """Check if an event_id has a corresponding resolved image amount."""
+        return event_id in self.amounts
+
