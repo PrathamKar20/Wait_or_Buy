@@ -37,6 +37,18 @@ Read [`problem_statement.md`](./problem_statement.md) for the full task spec, in
 [output.csv Schema Validator]
 ```
 
+### REST API Interface
+
+When deployed in containerized REST API mode, the service exposes the following endpoint:
+
+```bash
+# Evaluate a financial purchase request
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"user_id": "user_101", "requested_amount": 1200.0, "request_date": "2026-09-13"}'
+```
+
+
 
 ---
 
