@@ -38,7 +38,12 @@ class FinancialEngine:
         self.user_events_map = {u_id: df for u_id, df in self.events.groupby('user_id')}
         self.exchange_rate_cache = {}
 
+    def clear_cache(self) -> None:
+        """Clear cached exchange rate calculations."""
+        self.exchange_rate_cache.clear()
+
     def convert_currency(self, amount: float, from_curr: str, to_curr: str, date_str: str) -> float:
+
         """Converts amount from_curr to to_curr on date_str using exchange_rates.csv with caching."""
         if from_curr == to_curr or pd.isna(from_curr) or not from_curr:
             return amount
