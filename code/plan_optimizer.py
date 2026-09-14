@@ -15,6 +15,12 @@ class PlanOptimizer:
     def __init__(self, engine: FinancialEngine):
         self.engine = engine
 
+    def calculate_plan_penalty(self, num_payments: int, total_cost: float, requested_amount: float) -> float:
+        """Calculate penalty score for plan comparison (lower score is preferred)."""
+        extra_cost = max(0.0, total_cost - requested_amount)
+        return (num_payments * 10.0) + extra_cost
+
+
     def get_daily_headroom_trajectory(self, user_id: str, request_date: str, spending_changes: List[str] = None) -> List[float]:
         """
         Computes (Balance[t] - min_bal) for t = 0..90 days without request payments.
