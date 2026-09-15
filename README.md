@@ -285,3 +285,11 @@ az webapp config appsettings set \
   --settings GEMINI_API_KEY="[YOUR_AZURE_KEY_VAULT_SECRET]"
 ```
 
+### 4. Production Key Vault Secrets Setup
+
+```bash
+# Create Azure Key Vault secret
+az keyvault secret set --vault-name buyorwait-kv --name GEMINI-API-KEY --value "YOUR_AZURE_KEY"
+```
+
+
