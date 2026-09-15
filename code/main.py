@@ -5,13 +5,18 @@ Processes dataset/requests.csv and produces predictions in dataset/output.csv & 
 
 import os
 import sys
+import logging
 import pandas as pd
 from financial_engine import FinancialEngine
 from plan_optimizer import PlanOptimizer
 from explanation_generator import ExplanationGenerator
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger("buy_or_wait")
+
 def main():
-    print("Initializing Buy or Wait? Financial Decision Agent...")
+    logger.info("Initializing Buy or Wait? Financial Decision Agent...")
+
     
     data_dir = 'dataset'
     requests_path = os.path.join(data_dir, 'requests.csv')
