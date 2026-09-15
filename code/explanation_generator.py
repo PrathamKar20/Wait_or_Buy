@@ -10,7 +10,15 @@ class ExplanationGenerator:
     def __init__(self, engine):
         self.engine = engine
 
+    @staticmethod
+    def format_currency(amt: float, currency_symbol: str) -> str:
+        """Format floating point currency with commas and currency symbol."""
+        if amt == int(amt):
+            return f"{currency_symbol} {int(amt):,}"
+        return f"{currency_symbol} {amt:,.2f}"
+
     def generate_explanation(self, req_row: pd.Series, opt_result: Dict[str, Any]) -> str:
+
         u_id = str(req_row['user_id'])
         req_amt = float(req_row['requested_amount'])
         completion_date = str(req_row['desired_completion_date'])
