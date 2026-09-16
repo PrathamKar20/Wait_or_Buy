@@ -15,7 +15,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger("buy_or_wait")
 
 def main():
+    dry_run = "--dry-run" in sys.argv
+    if dry_run:
+        logger.info("Running in DRY-RUN mode.")
+
     logger.info("Initializing Buy or Wait? Financial Decision Agent...")
+
 
     
     data_dir = 'dataset'
