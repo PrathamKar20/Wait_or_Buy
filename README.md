@@ -292,4 +292,15 @@ az webapp config appsettings set \
 az keyvault secret set --vault-name buyorwait-kv --name GEMINI-API-KEY --value "YOUR_AZURE_KEY"
 ```
 
+---
+
+## Release Notes
+
+### Version 1.0.0 Production Release
+- Complete 90-day daily cashflow simulator with zero-hallucination math.
+- Multimodal OCR receipt parser and NLP message update parser.
+- 6-tier payment plan optimizer and schema-compliant CSV generator.
+- Azure deployment Dockerfile and GitHub Actions CI workflow.
+
+
 
